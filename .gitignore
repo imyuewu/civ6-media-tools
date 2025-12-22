@@ -1,0 +1,18 @@
+# PowerShell / VS Code
+.vscode/
+*.log
+
+# 临时输出
+*_out/
+*_output/
+test_out/
+ExportedWav/
+missing_wem.txt
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# OS / Tool temp
+*.tmp
+*.bak
