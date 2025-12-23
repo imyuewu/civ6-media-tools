@@ -9,7 +9,7 @@ param(
 )
 
 # ========== 配置：改成你自己的 vgmstream 路径 ==========
-$VgmstreamCli = "D:\Program Files (x86)\MediaTools\vgmstream\vgmstream-cli.exe"
+$VgmstreamCli = "D:\MediaTools\vgmstream\vgmstream-cli.exe"
 # ======================================================
 
 # ✅ XP2Banks.ini = Expansion2 音频加载索引
