@@ -1,7 +1,7 @@
-const Event = require('./event')
-const File = require('./file')
+const Civ6Event = require('./civ6_event')
+const Civ6AudioFile = require('./civ6_audio_file')
 
-class SoundBank {
+class Civ6SoundBank {
     constructor(id, name, language = "SFX", events = [], streamedFiles = [], memoryFiles = []) {
         
         this.id = id
@@ -11,8 +11,8 @@ class SoundBank {
         if (!Array.isArray(events)) {
             throw new Error('events 参数必须是一个数组')
         }
-        if (!events.every(event => event instanceof Event)) {
-            throw new Error('events 数组中的每个元素必须是 Event 类型的实例')
+        if (!events.every(event => event instanceof Civ6Event)) {
+            throw new Error('events 数组中的每个元素必须是 Civ6Event 类型的实例')
         }
 
         this.events = events
@@ -20,8 +20,8 @@ class SoundBank {
         if (!Array.isArray(streamedFiles)) {
             throw new Error('streamedFiles 参数必须是一个数组')
         }
-        if (!streamedFiles.every(streamedFile => streamedFile instanceof File)) {
-            throw new Error('streamedFiles 数组中的每个元素必须是 File 类型的实例')
+        if (!streamedFiles.every(streamedFile => streamedFile instanceof Civ6AudioFile)) {
+            throw new Error('streamedFiles 数组中的每个元素必须是 Civ6AudioFile 类型的实例')
         }
 
         this.streamedFiles = streamedFiles
@@ -29,8 +29,8 @@ class SoundBank {
         if (!Array.isArray(memoryFiles)) {
             throw new Error('memoryFiles 参数必须是一个数组')
         }
-        if (!memoryFiles.every(memoryFile => memoryFile instanceof File)) {
-            throw new Error('memoryFiles 数组中的每个元素必须是 File 类型的实例')
+        if (!memoryFiles.every(memoryFile => memoryFile instanceof Civ6AudioFile)) {
+            throw new Error('memoryFiles 数组中的每个元素必须是 Civ6AudioFile 类型的实例')
         }
 
         this.memoryFiles = memoryFiles
@@ -63,6 +63,37 @@ class SoundBank {
     setMemoryFiles = (memoryFiles) => {
         this.memoryFiles = memoryFiles
     }
+
+    getId = () =>{
+        return this.id
+    }
+
+    getName = () => {
+        return this.name
+    }
+
+    getLanguage = () => {
+        return this.language
+    }
+
+    getEvents = () => {
+        return this.events
+    }
+
+    getStreamedFiles = () => {
+        return this.streamedFiles
+    }
+
+    getMemoryFiles = () => {
+        return this.memoryFiles
+    }
+
+    batchConvertWem2Wav = async () => {
+        const files = this.getStreamedFiles()
+        for (const file of files) {
+            await file.convertWem2Wav()
+        }
+    }
 }
 
-module.exports = SoundBank
+module.exports = Civ6SoundBank

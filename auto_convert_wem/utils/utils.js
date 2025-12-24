@@ -49,9 +49,38 @@ const checkFileOrDirExists = async (path) => {
     }
 }
 
+const isNonEmptyString = (value) => {
+    return typeof value === 'string' && value.trim !== ''
+}
+
+const timeEslaped = (start) => {
+    const end = process.hrtime(start)
+    
+    let minutes = Math.floor(end[0] / 60)
+    const hours = Math.floor(minutes / 60)
+    minutes = Math.floor(minutes % 60)
+    const seconds = Math.floor(end[0] % 60)
+
+    return {
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+    }
+}
+
+const timeEslapedFormatted = (start) => {
+    const result = timeEslaped(start)
+    const formatTwoDigits = (num) => num.toString().padStart(2, '0');
+
+    return `${formatTwoDigits(result.hours)}小时 ${formatTwoDigits(result.minutes)}分 ${formatTwoDigits(result.seconds)}秒`
+}
+
 module.exports = {
     checkArgs,
     isXmlFile,
     getFileName,
     checkFileOrDirExists,
+    isNonEmptyString,
+    timeEslaped,
+    timeEslapedFormatted,
 }
