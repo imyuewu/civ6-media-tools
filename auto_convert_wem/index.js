@@ -8,7 +8,7 @@ const utils = require('./utils/utils')
 
 const main = (argv) => {
     utils.checkArgs(argv)
-    soundBankParser.autoConvertWemFiles(argv[0], argv[1])
+    soundBankParser.startProcess(argv[0], argv[1])
 }
 
 main(process.argv.slice(2))

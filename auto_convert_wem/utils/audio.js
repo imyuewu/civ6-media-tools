@@ -32,7 +32,7 @@ const convertWem2Wav = async (inputFile, outputFile) => {
     })
 }
 
-const canLoadFile = async (filepath) => {
+const canLoadWemFile = async (filepath) => {
     try {
         const stats = await fs.promises.stat(filepath)
         if (stats.isFile()) {
@@ -92,6 +92,6 @@ const getAudioLength = async (inputFile) => {
 
 module.exports = {
     convertWem2Wav,
-    canLoadFile,
+    canLoadWemFile,
     getAudioLength
 }

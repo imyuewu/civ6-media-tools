@@ -49,6 +49,16 @@ const checkFileOrDirExists = async (path) => {
     }
 }
 
+const checkFileOrDirExistsSync = (path) => {
+    try {
+        // 使用 fs.accessSync 来检查文件是否存在
+        fs.accessSync(path, fs.constants.F_OK)  // 默认检查文件是否存在
+        return true  // 如果文件存在，返回 true
+    } catch (err) {
+        return false  // 如果捕获到错误，返回 false
+    }
+}
+
 const isNonEmptyString = (value) => {
     return typeof value === 'string' && value.trim !== ''
 }
@@ -80,6 +90,7 @@ module.exports = {
     isXmlFile,
     getFileName,
     checkFileOrDirExists,
+    checkFileOrDirExistsSync,
     isNonEmptyString,
     timeEslaped,
     timeEslapedFormatted,

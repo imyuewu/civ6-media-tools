@@ -7,10 +7,22 @@ class Civ6Event {
         }    
         this.id = id
         this.name = name
-        this.soundBankNames = []
+        this.soundBankNames = new Set()
         if (utils.isNonEmptyString(soundBankName)) {
-            this.soundBankNames.push(soundBankName)
+            this.soundBankNames.add(soundBankName)
         }
+    }
+
+    getId = () => {
+        return this.id
+    }
+
+    getName = () => {
+        return this.name
+    }
+
+    getSoundBankNames = () => {
+        return this.soundBankNames
     }
 
     getInfo = () => {
@@ -25,9 +37,13 @@ class Civ6Event {
         this.name = name
     }
 
+    setSoundBankNames = (soundBankNames) => {
+        this.soundBankNames = soundBankNames
+    }
+
     mergeSoundBankNames = (otherEvent) => {
-        const mergedSoundBankNames = new Set([...this.soundBankNames, ...otherEvent.soundBankNames])
-        return Array.from(mergedSoundBankNames)
+        otherEvent.soundBankNames.forEach(item => this.soundBankNames.add(item))
+        return this.soundBankNames
     }
 
     equals = (otherEvent) => {

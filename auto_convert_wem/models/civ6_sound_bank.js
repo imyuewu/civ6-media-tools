@@ -1,5 +1,6 @@
 const Civ6Event = require('./civ6_event')
 const Civ6AudioFile = require('./civ6_audio_file')
+const CONSTS = require('../utils/consts')
 
 class Civ6SoundBank {
     constructor(id, name, language = "SFX", events = [], streamedFiles = [], memoryFiles = []) {
@@ -90,8 +91,19 @@ class Civ6SoundBank {
 
     batchConvertWem2Wav = async () => {
         const files = this.getStreamedFiles()
+        const missingWemFiles = []
+        let isAllSuccess = true
         for (const file of files) {
-            await file.convertWem2Wav()
+            const result = await file.convertWem2Wav()
+            if (result === CONSTS.CONVERT_WEM_FILE_RESULT.SUCCESS) continue
+            isAllSuccess = false
+            if (result === CONSTS.CONVERT_WEM_FILE_RESULT.MISSING_WEM_FILE_FAILURE) {
+                missingWemFiles.push(file)
+            }
+        }
+        return {
+            isAllSuccess: isAllSuccess,
+            missingWemFiles: missingWemFiles
         }
     }
 }
