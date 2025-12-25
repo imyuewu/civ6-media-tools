@@ -21,7 +21,7 @@ const convertWem2Wav = async (inputFile, outputFile) => {
         command.on('close', (code) => {
             if (code === 0) {
                 // console.log(stdoutData)
-                // console.log(`${inputFile} => ${outputFile} 成功`)
+                console.log(`${inputFile} => ${outputFile} 成功`)
                 resolve(stdoutData)
             } else {
                 console.error(`${inputFile} => ${outputFile} 失败`)

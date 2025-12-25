@@ -204,8 +204,11 @@ const autoConvertWemFiles = async (inputDir, outputDir) => {
                 // 递归处理子目录
                 await autoConvertWemFiles(fullPath, outputDir)
             } else {
-                if (!utils.isXmlFile(fullPath)) continue
-                const xmlFileFullPath = fullPath
+                // 先找到.bnk文件，再定位到同名xml文件
+                if (!utils.isBnkFile(fullPath)) continue
+                const bnk2xmlFileName = `${path.basename(fullPath, '.bnk')}.xml`
+                const xmlFileFullPath = path.join(inputDir, bnk2xmlFileName)
+                if (!await utils.checkFileOrDirExists(xmlFileFullPath)) continue
                 // console.log(`[文件] ${xmlFileFullPath}`); // 如果是xml文件
 
                 // 开始解析xml文件

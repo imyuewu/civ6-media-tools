@@ -35,6 +35,11 @@ const getFileName = (filePath) => {
     return path.basename(filePath, path.extname(filePath))
 }
 
+const isBnkFile = (filePath) => {
+    const extname = path.extname(filePath)
+    return extname === '.bnk'
+}
+
 const isXmlFile = (filePath) => {
     const extname = path.extname(filePath)  // 获取文件的扩展名
     return extname === '.xml'
@@ -42,7 +47,7 @@ const isXmlFile = (filePath) => {
 
 const checkFileOrDirExists = async (path) => {
     try {
-        await fs.access(path)
+        await fs.promises.access(path)
         return true
     } catch (err) {
         return false
@@ -87,6 +92,7 @@ const timeEslapedFormatted = (start) => {
 
 module.exports = {
     checkArgs,
+    isBnkFile,
     isXmlFile,
     getFileName,
     checkFileOrDirExists,
