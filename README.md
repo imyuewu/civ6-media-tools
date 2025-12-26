@@ -73,11 +73,15 @@ node index.js <输入文件夹路径> <输出文件夹路径>
 ```bash
 node translate_civ6_gamedb.js <目标语言> <DebugGameplay.sqlite文件路径> <DebugLocalization.sqlite文件路径>
 ```
-`<目标语言>`参数如果没传的话默认会替换成中文
+`<目标语言>`参数如果没传的话默认会替换成中文，可选参数包括`'en_US', 'fr_FR', 'de_DE', 'it_IT', 'es_ES', 'ja_JP', 'ru_RU', 'pl_PL', 'ko_KR', 'zh_Hant_HK', 'zh_Hans_CN', 'pt_BR'`。
+
 `<DebugGameplay.sqlite文件路径>` 和 `<DebugLocalization.sqlite文件路径>`默认是`auto_convert_wem\civ6_db`，你可以在`auto_convert_wem`新建一个`civ6_db`文件夹，然后把`DebugGameplay.sqlite`和`DebugLocalization.sqlite`文件丢进去。
+
 你也可以直接修改`config.js`里面以下两行来指定数据库位置：
 ```nodejs
 const DEFAULT_GAMEPLAY_DB_PATH = './civ6_db/DebugGameplay.sqlite'
 const DEFAULT_LOCALIZATION_DB_PATH = './civ6_db/DebugLocalization.sqlite'
 ```
-自动替换完成之后，会在`civ6_db`目录下生成`DebugGameplay_zh_Hans_CN.sqlite`，该文件就是完成文本替换后的目标数据库。同时会在`DebugGameplay_zh_Hans_CN.sqlite`同级自动生成一个`auto_translate.log`文件，里面输出了一些替换过程中的异常，比如有的`LOC_`文件无法在`DebugLocalization.sqlite`里面找到，或者是空字符串这种。
+
+自动替换完成之后，会在`civ6_db`目录下生成`DebugGameplay_zh_Hans_CN.sqlite`，该文件就是完成文本替换后的目标数据库。
+同时会在`DebugGameplay_zh_Hans_CN.sqlite`同级自动生成一个`auto_translate.log`文件，里面输出了一些替换过程中的异常，比如有的`LOC_`文件无法在`DebugLocalization.sqlite`里面找到，或者是空字符串这种。
