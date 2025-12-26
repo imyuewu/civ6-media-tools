@@ -44,3 +44,6 @@ Thumbs.db
 
 # Vagrant files
 .vagrant/
+
+# civ6数据库目录
+civ6_db/
