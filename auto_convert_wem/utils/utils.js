@@ -90,6 +90,21 @@ const timeEslapedFormatted = (start) => {
     return `${formatTwoDigits(result.hours)}小时 ${formatTwoDigits(result.minutes)}分 ${formatTwoDigits(result.seconds)}秒`
 }
 
+// 使用正则表达式去掉占位符和格式化部分
+const cleanText = (text) => {
+    if (!text) return null
+    return text.replace(/\+?\{[^}]*\}/g, "").replace(/\[.*?\]/g, "").trim();
+}
+
+const logToFile = async (logFilePath, message) => {
+    try {
+        await fs.promises.appendFile(logFilePath, message + '\n')
+    } catch (err) {
+        console.error(`向 ${logFilePath} 日志文件写入日志失败: `, err)
+    }
+}
+
+
 module.exports = {
     checkArgs,
     isBnkFile,
@@ -100,4 +115,6 @@ module.exports = {
     isNonEmptyString,
     timeEslaped,
     timeEslapedFormatted,
+    cleanText,
+    logToFile,
 }
