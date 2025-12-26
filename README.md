@@ -9,7 +9,7 @@
 
 1. 克隆仓库：
     ```bash
-    git clone [git@github.com:imyuewu/civ6-media-tools.git](https://github.com/imyuewu/civ6-media-tools)
+    git clone git@github.com:imyuewu/civ6-media-tools.git
     ```
 
 2. 安装`Node.js`并验证：
